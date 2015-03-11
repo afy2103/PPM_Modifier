@@ -24,15 +24,34 @@ public class EffectsTest {
 			else {
 				valid_input = true;
 				if (response.equals("F")) {
-					photoshop.filterEffect();
+					try {
+						photoshop.filterEffect();
+					}
+
+					catch (IOException e) {
+						e.printStackTrace();
+					}
+
 				}
 				
 				else if (response.equals("FH")) {
-					photoshop.flipHorizontalEffect();
+					try {
+						photoshop.flipHorizontalEffect();
+					}
+
+					catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
 				
 				else if (response.equals("GS")) {
-					photoshop.greyScaleEffect();
+					try {
+						photoshop.greyScaleEffect();
+					}|
+
+					catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}

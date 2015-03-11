@@ -286,7 +286,7 @@ public class Effects {
 	}
 	
 	//Handles I/O for the filter method
-	public void filterEffect() {
+	public void filterEffect() throws IOException {
 		Scanner input = new Scanner(System.in);
 		File[] files;
 
@@ -338,17 +338,13 @@ public class Effects {
 			catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
 			}
-			
-			catch (IOException e) {
-				e.printStackTrace();
-			}
 		
 		input.close();
 		
 	}
 	
 	//Handles I/O for the flipHorizontal method
-	public void flipHorizontalEffect() {
+	public void flipHorizontalEffect() throws IOException {
 		Scanner input = new Scanner(System.in);
 		String file_name = null;
 		
@@ -387,17 +383,13 @@ public class Effects {
 		catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 		}
-		
-		catch (IOException e) {
-			e.printStackTrace();
-		}
 	
 		input.close();
 		
 	}
 	
 	//Handles I/O for the greyScale method
-	public void greyScaleEffect() {
+	public void greyScaleEffect() throws IOException {
 		Scanner input = new Scanner(System.in);
 		String file_name = null;
 		
@@ -435,10 +427,6 @@ public class Effects {
 		
 		catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
-		}
-		
-		catch (IOException e) {
-			e.printStackTrace();
 		}
 	
 		input.close();
