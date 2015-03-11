@@ -34,14 +34,21 @@ public class Effects {
 
 	//Checks if the files are valid; if so, updates scanners
 	public void filesCheck(ArrayList<String> strings) throws FileNotFoundException {
-		File[] files = new File[strings.size()];
-		for (int i = 0; i < files.length; i++) {
-			files[i] = new File(strings.get(i));
+		if (strings.size() == 0) {
+			throw new IllegalArgumentException();
 		}
-		
-		for (int i = 0; i < files.length; i++) {
-			Scanner scan = new Scanner(files[i]);
-			scanners.add(scan);
+
+		else {
+			File[] files = new File[strings.size()];
+
+			for (int i = 0; i < files.length; i++) {
+				files[i] = new File(strings.get(i));
+			}
+			
+			for (int i = 0; i < files.length; i++) {
+				Scanner scan = new Scanner(files[i]);
+				scanners.add(scan);
+			}
 		}
 	}
 
@@ -299,13 +306,19 @@ public class Effects {
 		while(!validFiles) {
 			ArrayList<String> file_names = new ArrayList<>();
 			System.out.println("Please input the images you would like to use.");
-			System.out.println("When you are done inputting files, enter \"Done\":");
+			System.out.println("When you are done inputting files, enter \"Done\".");
+			System.out.println("If you would like to exit, enter \"Exit\".");
 			while (input.hasNext()){
 				String next_input = input.next();
 				if (next_input.equals("Done")) {
 					break;
 				}
 				
+				else if (next_input.equals("Exit")) {
+					System.out.println("Have a nice day!");
+					System.exit(0);
+				}
+
 				else {
 					file_names.add(next_input);
 				}
@@ -320,23 +333,36 @@ public class Effects {
 			catch (FileNotFoundException e) {
 				System.out.println("One or more invalid file names; check again.");
 			}
+
+			catch (IllegalArgumentException e) {
+				System.out.println("No file(s) entered.");
+			}
 		}
 		
 		files = arrayMaker(fileNames);
-		System.out.println("Now please input the name of the new image you would like to create:");
+		System.out.println("Now please input the name of the new image you would like to create.");
+		System.out.println("If you would like to exit, enter \"Exit\".");
 			String output = input.next();
-			try {
-				filter(files, output);
-				System.out.println("New image complete!");
-			} 
-			
-			catch (NoSuchElementException e) {
-				System.out.println("One or more file contents invalid.");
-				
+
+			if (output.equals("Exit")) {
+				System.out.println("Have a nice day!");
+				System.exit(0);
 			}
-			
-			catch (IllegalArgumentException e) {
-				System.out.println(e.getMessage());
+
+			else {
+				try {
+					filter(files, output);
+					System.out.println("New image complete!");
+				} 
+				
+				catch (NoSuchElementException e) {
+					System.out.println("One or more file contents invalid.");
+					
+				}
+				
+				catch (IllegalArgumentException e) {
+					System.out.println(e.getMessage());
+				}
 			}
 		
 		input.close();
@@ -353,35 +379,60 @@ public class Effects {
 		
 		while (!validFile) {
 			ArrayList<String> fileName = new ArrayList<>();
-			System.out.println("Please input the image you would like to flip:");
-			fileName.add(input.next());
-			try {
-				filesCheck(fileName);
-				file_name = fileName.get(0);
-				validFile = true;
+			System.out.println("Please input the image you would like to flip.");
+			System.out.println("If you would like to exit, enter \"Exit\".");
+
+			String inputFile = input.next();
+			if (inputFile.equals("Exit")) {
+				System.out.println("Have a nice day!");
+				System.exit(0);
 			}
-			
-			catch (FileNotFoundException e) {
-				System.out.println("Invalid file name; please try again.");
+
+			else {
+				fileName.add(inputFile);
+
+				try {
+					filesCheck(fileName);
+					file_name = fileName.get(0);
+					validFile = true;
+				}
+				
+				catch (FileNotFoundException e) {
+					System.out.println("Invalid file name; please try again.");
+				}
+
+				catch (IllegalArgumentException e) {
+					System.out.println("No file entered.");
+				}
 			}
 		}
 		
 		File file = new File(file_name);
 		
-		System.out.println("Now please input the name of the new image you would like to create:");
+		System.out.println("Now please input the name of the new image you would like to create.");
+		System.out.println("If you would like to exit, enter \"Exit\".");
+
 		String output = input.next();
-		try {
-			flipHorizontal(file, output);
-			System.out.println("New image complete!");
-		} 
-		
-		catch (NoSuchElementException e) {
-			System.out.println("File contents invalid.");
-			
+
+		if (output.equals("Exit")) {
+			System.out.println("Have a nice day!");
+			System.exit(0);
 		}
-		
-		catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
+
+		else {
+			try {
+				flipHorizontal(file, output);
+				System.out.println("New image complete!");
+			} 
+			
+			catch (NoSuchElementException e) {
+				System.out.println("File contents invalid.");
+				
+			}
+			
+			catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+			}
 		}
 	
 		input.close();
@@ -398,35 +449,60 @@ public class Effects {
 		
 		while (!validFile) {
 			ArrayList<String> fileName = new ArrayList<>();
-			System.out.println("Please input the image you would like to grey:");
-			fileName.add(input.next());
-			try {
-				filesCheck(fileName);
-				file_name = fileName.get(0);
-				validFile = true;
+			System.out.println("Please input the image you would like to grey.");
+			System.out.println("If you would like to exit, enter \"Exit\".");
+
+			String inputFile = input.next();
+			if (inputFile.equals("Exit")) {
+				System.out.println("Have a nice day!");
+				System.exit(0);
 			}
-			
-			catch (FileNotFoundException e) {
-				System.out.println("Invalid file name; please try again.");
+
+			else {
+				fileName.add(inputFile);
+
+				try {
+					filesCheck(fileName);
+					file_name = fileName.get(0);
+					validFile = true;
+				}
+				
+				catch (FileNotFoundException e) {
+					System.out.println("Invalid file name; please try again.");
+				}
+
+				catch (IllegalArgumentException e) {
+					System.out.println("No file entered.");
+				}
 			}
 		}
 		
 		File file = new File(file_name);
 		
-		System.out.println("Now please input the name of the new image you would like to create:");
+		System.out.println("Now please input the name of the new image you would like to create.");
+		System.out.println("If you would like to exit, enter \"Exit\".");
+
 		String output = input.next();
-		try {
-			greyScale(file, output);
-			System.out.println("New image complete!");
-		} 
-		
-		catch (NoSuchElementException e) {
-			System.out.println("File contents invalid.");
-			
+
+		if (output.equals("Exit")) {
+			System.out.println("Have a nice day!");
+			System.exit(0);
 		}
-		
-		catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
+
+		else {
+			try {
+				greyScale(file, output);
+				System.out.println("New image complete!");
+			} 
+			
+			catch (NoSuchElementException e) {
+				System.out.println("File contents invalid.");
+				
+			}
+			
+			catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+			}
 		}
 	
 		input.close();

@@ -3,6 +3,7 @@
  * by Alex Yu (afy2103)
  * This handles I/O for choosing the desired effect that the user wants
  */
+import java.io.*;
 import java.util.*;
 
 public class EffectsTest {
@@ -47,7 +48,7 @@ public class EffectsTest {
 				else if (response.equals("GS")) {
 					try {
 						photoshop.greyScaleEffect();
-					}|
+					}
 
 					catch (IOException e) {
 						e.printStackTrace();
