@@ -10,12 +10,10 @@ import java.util.*;
 
 public class Effects {	
 	ArrayList<Scanner> scanners;
-	String magicNumber;
 	
 	//Constructor
 	public Effects() {
 		scanners = new ArrayList<>();
-		magicNumber = "P3";
 	}
 	
 	//Takes an array of images and uses majority rule to create a new file
@@ -153,7 +151,9 @@ public class Effects {
 		
 		//Splits line including dimensions into separate numbers
 		String[] dimensions = headerElem[1].split("\\s+");
-		if (!magicNumber.equals(headerElem[0])) {
+
+		//Checks for correct magic number
+		if (!"P3".equals(headerElem[0])) {
 			error = true;
 		}
 
